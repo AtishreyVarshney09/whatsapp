@@ -1,25 +1,21 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Sidebar from './components/Sidebar';
+import ChatWindow from './components/ChatWindow';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [selectedContact, setSelectedContact] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Sidebar onSelectContact={setSelectedContact} />
+      {selectedContact ? (
+        <ChatWindow contact={selectedContact} />
+      ) : (
+        <div className="no-chat">Select a contact to start chatting</div>
+      )}
     </div>
   );
-}
+};
 
 export default App;
